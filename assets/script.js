@@ -32,6 +32,7 @@ const createPreviousSearch = () => {
 };
 
 if (savedCities) {
+  // Load localStorage if it exists on page load
   createPreviousSearch();
 }
 searchButton.addEventListener("click", searchCity);
