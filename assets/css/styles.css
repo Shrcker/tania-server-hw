@@ -1,0 +1,34 @@
+* {
+  text-align: center;
+}
+
+body {
+  margin: 40px;
+}
+
+header {
+  max-height: 15%;
+  margin-bottom: 50px;
+  padding: 40px;
+  color: white;
+  text-justify: center;
+  background: skyblue;
+}
+
+main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  /* grid-template-areas:
+    "sidebar content content"
+    "footer  footer  footer"; */
+  grid-gap: 10px;
+}
+
+.weather-input {
+  /* grid-area: sidebar; */
+  border-style: inset;
+}
+
+#todays-weather {
+  border-style: inset;
+}
