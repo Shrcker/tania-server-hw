@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <title>Weather Tracker</title>
-  <link rel="stylesheet" href="./assets/css/styles.css" />
-</head>
-
-<body>
-  <header>
-    <h1>Add Content Here</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Weather Tracker</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
   </head>
-  <main>
-    <form class="weather-input" id="weather-form">
-      <label for="city-search" class="weather-input">Search for a city:</label><br>
-      <input type="text" name="city-search" id="weather-txt" class="weather-input"><br>
-      <button type="button" id="search-button" class="weather-input">Search</button>
-    </form>
-  </main>
-  <script src="./assets/script.js"></script>
-</body>
+
+  <body>
+    <header>
+      <h1>Weather Tracker</h1>
+    </header>
+    <main>
+      <form class="weather-input" id="weather-form">
+        <label for="city-search">Search for a city:</label><br />
+        <input
+          type="text"
+          name="city-search"
+          id="weather-txt"
+          class="weather-input"
+        /><br />
+        <button type="button" id="search-button" class="weather-input">
+          Search
+        </button>
+        <div id="search-container"></div>
+      </form>
+
+      <div id="todays-weather"></div>
+    </main>
+    <script src="./assets/script.js"></script>
+  </body>
+</html>
