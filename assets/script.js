@@ -15,15 +15,26 @@ const searchCity = (e) => {
   e.preventDefault();
   const citySearch = searchText.value.toLowerCase(); // Saving value to let allows re-execution of function
   getApi(citySearch);
+  searchContainer.innerHTML += `<button onclick=getApi('${citySearch}')>${citySearch}</button>`;
   cityList.push(citySearch);
-  localStorage.setItem("city-list", JSON.stringify(cityList));
-  searchText.value = "";
+
+  const cityFound = savedCities.find((city) => city === userInput);
+  if (!cityFound) {
+    localStorage.setItem("city-list", JSON.stringify(cityList));
+  }
+  reset();
 };
 
-const getApi = (search) => {
-  searchContainer.innerHTML += `<button onclick="getApi(${search})">${search}</button>`;
-  const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=e30f5243260d367c3dd383499a1d3638`; //&appid={API key}";
-  reset();
+const previousSearch = (name) => {
+  for (const cities of name) {
+    searchContainer.innerHTML += `<button onclick="getApi('click', '${cities}')">${cities}</button>`;
+  }
+};
+
+const getApi = (e, search) => {
+  e.preventDefault();
+  const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=d33049b1401fc91a8e5b73ab2c0a4790`; //&appid={API key}";
+  //reset();
   fetch(weatherURL)
     .then((response) => {
       return response.json();
@@ -69,6 +80,8 @@ const reset = () => {
   todaysWeather.innerHTML = "";
   forecastContainer.innerHTML = "";
 };
+
+//previousSearch(savedCities);
 
 // const createPreviousSearch = () => {
 //   // Function to create elements from localStorage on page load
