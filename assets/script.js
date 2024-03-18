@@ -21,6 +21,7 @@ const searchCity = (e) => {
 
 const getApi = (search) => {
   const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=e30f5243260d367c3dd383499a1d3638`; //&appid={API key}";
+  reset();
   fetch(weatherURL)
     .then((response) => {
       return response.json();
@@ -44,6 +45,9 @@ const getApi = (search) => {
             <ul>Wind: ${windSpeed} MPH</ul>
             <ul>Humidity: ${humidity}%</ul>
             </div>`;
+          if (todaysWeather.innerHTML === HTMLHeader) {
+            todaysWeather.innerHTML = "";
+          }
 
           todaysWeather.innerHTML += HTMLHeader;
         } else {
@@ -60,6 +64,11 @@ const getApi = (search) => {
         }
       }
     });
+};
+
+const reset = () => {
+  todaysWeather.innerHTML = "";
+  forecastContainer.innerHTML = "";
 };
 
 // const createPreviousSearch = () => {
