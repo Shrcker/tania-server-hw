@@ -1,6 +1,7 @@
 const searchText = document.getElementById("weather-txt");
 const searchButton = document.getElementById("search-button");
 const forecastContainer = document.getElementById("forecast-container");
+const searchContainer = document.getElementById("search-container");
 const todaysWeather = document.getElementById("todays-weather");
 const savedCities = JSON.parse(localStorage.getItem("city-list"));
 const date = new Date();
@@ -20,6 +21,7 @@ const searchCity = (e) => {
 };
 
 const getApi = (search) => {
+  searchContainer.innerHTML += `<button onclick="getApi(${search})">${search}</button>`;
   const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=e30f5243260d367c3dd383499a1d3638`; //&appid={API key}";
   reset();
   fetch(weatherURL)
