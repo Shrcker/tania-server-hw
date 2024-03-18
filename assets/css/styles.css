@@ -11,24 +11,48 @@ header {
   margin-bottom: 50px;
   padding: 40px;
   color: white;
-  text-justify: center;
+  /* text-justify: center; */
   background: skyblue;
 }
 
 main {
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  /* grid-template-areas:
-    "sidebar content content"
-    "footer  footer  footer"; */
   grid-gap: 10px;
+  grid-template-columns: 0.5fr 2fr;
+  grid-template-rows: repeat(5, 100px);
+  padding: 10px;
 }
 
 .weather-input {
-  /* grid-area: sidebar; */
   border-style: inset;
+  grid-column: 1 / 2;
+  grid-row: 1 / max-content;
+}
+
+#forecast-header {
+  grid-row: 3;
+  grid-column: 2;
+  display: none;
 }
 
 #todays-weather {
   border-style: inset;
+  grid-column: 2 / max-content;
+  grid-row: 1 / 3;
+}
+
+#forecast-container {
+  align-self: left;
+  padding: 20px;
+  grid-gap: 1px;
+  grid-row: 3 / 5;
+  grid-column: 2/3;
+  display: grid;
+  grid-template-columns: repeat(5, 2fr);
+  grid-column-start: auto;
+}
+
+.weather-card {
+  border-style: inset;
+  grid-row: 1;
 }
