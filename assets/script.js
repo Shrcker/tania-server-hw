@@ -44,10 +44,7 @@ const getApi = (search) => {
             <ul>Wind: ${windSpeed} MPH</ul>
             <ul>Humidity: ${humidity}%</ul>
             </div>`;
-          // let cardHeader = document.createElement("div");
-          // cardHeader.id = "todays-weather";
-          // cardHeader.innerHTML = HTMLHeader;
-          // document.body.appendChild(cardHeader);
+
           todaysWeather.innerHTML += HTMLHeader;
         } else {
           let HTMLText = `
@@ -58,12 +55,7 @@ const getApi = (search) => {
             <ul>Wind Speed: ${windSpeed} MPH</ul>
             <ul>Humidity: ${humidity}%</ul>
             </div>`;
-          // let weatherCard = document.createElement("div");
-          // weatherCard.className = "weather-card";
-          // weatherCard.innerHTML = HTMLText;
 
-          // document.body.appendChild(cardHeader);
-          // document.body.appendChild(weatherCard);
           forecastContainer.innerHTML += HTMLText;
         }
       }
