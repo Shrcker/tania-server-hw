@@ -14,11 +14,11 @@ const searchCity = (e) => {
   // Function to search API for the user inputted city.
   e.preventDefault();
   const citySearch = searchText.value.toLowerCase(); // Saving value to let allows re-execution of function
-  getApi(citySearch);
-  searchContainer.innerHTML += `<button onclick=getApi('${citySearch}')>${citySearch}</button>`;
+  getApi(e, citySearch);
+  searchContainer.innerHTML += `<button onclick=getApi(event, '${citySearch}')>${citySearch}</button>`;
   cityList.push(citySearch);
 
-  const cityFound = savedCities.find((city) => city === userInput);
+  const cityFound = savedCities.find((city) => city === citySearch);
   if (!cityFound) {
     localStorage.setItem("city-list", JSON.stringify(cityList));
   }
@@ -27,7 +27,7 @@ const searchCity = (e) => {
 
 const previousSearch = (name) => {
   for (const cities of name) {
-    searchContainer.innerHTML += `<button onclick="getApi('click', '${cities}')">${cities}</button>`;
+    searchContainer.innerHTML += `<button onclick="getApi(event, '${cities}')">${cities}</button>`;
   }
 };
 
