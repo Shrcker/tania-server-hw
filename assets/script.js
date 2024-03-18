@@ -45,9 +45,6 @@ const getApi = (search) => {
             <ul>Wind: ${windSpeed} MPH</ul>
             <ul>Humidity: ${humidity}%</ul>
             </div>`;
-          if (todaysWeather.innerHTML === HTMLHeader) {
-            todaysWeather.innerHTML = "";
-          }
 
           todaysWeather.innerHTML += HTMLHeader;
         } else {
