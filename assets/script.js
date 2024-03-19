@@ -3,45 +3,49 @@ const searchButton = document.getElementById("search-button");
 const forecastContainer = document.getElementById("forecast-container");
 const searchContainer = document.getElementById("search-container");
 const todaysWeather = document.getElementById("todays-weather");
-const savedCities = JSON.parse(localStorage.getItem("city-list"));
+
 const date = new Date();
 const month = date.getMonth() + 1;
 let day = date.getDate();
 const year = date.getFullYear();
-let cityList = [];
+let cityList = JSON.parse(localStorage.getItem("city-list")) || []; // Array that will act as the localStorage's global surrogate
 
 const searchCity = (e) => {
   // Function to search API for the user inputted city.
   e.preventDefault();
-  const citySearch = searchText.value.toLowerCase(); // Saving value to let allows re-execution of function
-  getApi(citySearch);
-  searchContainer.innerHTML += `<button onclick=getApi('${citySearch}')>${citySearch}</button>`;
-  cityList.push(citySearch);
 
-  const cityFound = savedCities.find((city) => city === userInput);
+  const citySearch = searchText.value.toLowerCase(); // Saving value to let allows re-execution of function
+  getApi(e, citySearch); //Search the API for that city's weather
+  cityList.push(citySearch); // saving search value to localStorage array
+
+  // Fetches the most up to date localStorage object
+  const savedCities = JSON.parse(localStorage.getItem("city-list")) || [];
+  const cityFound = savedCities.find((city) => city === citySearch);
   if (!cityFound) {
+    // Saves a city search to localStorage and makes it a button if it has not already been searched
+    searchContainer.innerHTML += `<button class="last-search" onclick="getApi(event, '${citySearch}')">${citySearch}</button>`;
     localStorage.setItem("city-list", JSON.stringify(cityList));
   }
-  reset();
 };
 
-const previousSearch = (name) => {
-  for (const cities of name) {
-    searchContainer.innerHTML += `<button onclick="getApi('click', '${cities}')">${cities}</button>`;
+const previousSearch = () => {
+  const savedCities = JSON.parse(localStorage.getItem("city-list")) || [];
+  for (const cities of savedCities) {
+    searchContainer.innerHTML += `<button class="last-search" onclick="getApi(event, '${cities}')">${cities}</button>`;
   }
 };
 
 const getApi = (e, search) => {
   e.preventDefault();
-  const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=d33049b1401fc91a8e5b73ab2c0a4790`; //&appid={API key}";
-  //reset();
+  reset();
+  const weatherURL = `https://api.openweathermap.org/data/2.5/forecast?q=${search}&appid=d33049b1401fc91a8e5b73ab2c0a4790`;
   fetch(weatherURL)
     .then((response) => {
       return response.json();
     })
     .then((data) => {
       console.log(data);
-      for (let i = 0; i < 5; i++) {
+      for (let i = 0; i < 6; i++) {
         let name = data.city.name;
         let currentDate = `(${month}-${day++}-${year})`;
         let clearness = data.list[i].weather[0].main;
@@ -81,7 +85,7 @@ const reset = () => {
   forecastContainer.innerHTML = "";
 };
 
-//previousSearch(savedCities);
+previousSearch();
 
 // const createPreviousSearch = () => {
 //   // Function to create elements from localStorage on page load
